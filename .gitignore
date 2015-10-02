@@ -1,0 +1,6 @@
+var/cache
+var/report
+var/session
+var/_cache
+.idea
+app/etc/local.xml

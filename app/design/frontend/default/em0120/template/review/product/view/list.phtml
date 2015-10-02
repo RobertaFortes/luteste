@@ -39,9 +39,10 @@
 <?php $_items = $this->getReviewsCollection()->getItems();?>
 <div class="box-collateral box-reviews" id="customer-reviews">
     <?php if (count($_items)):?>
-        <h2><span><?php echo $this->__('Customer Reviews') ?></span></h2>
+        
         <?php echo $this->getChildHtml('toolbar') ?>
         <dl>
+            <h2><span><?php echo $this->__('Avaliação dos Clientes') ?></span></h2>
 			<?php $i=0;foreach ($_items as $_review):?>
 				<?php if(($url1!=$url2)&&($i>4)){break;}?>
 				<?php

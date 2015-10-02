@@ -50,10 +50,11 @@
 				<input type="hidden" name="related_product" id="related-products-field" value="" />
 			</div>
 			<div class="product-view-detail">
-				<div class="product-img-box" style="width:<?php echo $setting->getImageProduct_BaseImageWidth(380) ?>px;">
+				<div class="product-img-box col-sm-17">
 					<?php echo $this->getChildHtml('media') ?>
+					
 				</div>
-				<div class="product-shop">
+				<div class="product-shop col-sm-6">
 					<?php list($_prev_prod, $_next_prod) = Mage::helper('em0120settings/product')->getPreviousNextProducts($this->getProduct()); ?>
 					<?php if($_prev_prod != NULL): ?>
 					<a href="<?php echo $_prev_prod->getProductUrl(); ?>" class="prev" title="<?php echo $this->__('Previous Product') ?>"><?php echo $this->__('Previous') ?></a>
@@ -66,7 +67,7 @@
 					</div>
 					<p class="sku"><?php echo $this->__('SKU:') ?> <?php echo $_product->getSKU()?></p>
 					<?php if ($this->canEmailToFriend()): ?>
-					<p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
+					<!-- <p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p> -->
 					<?php endif; ?>
 					<?php if ($_product->isAvailable()): ?>
 					<p class="availability in-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('In stock') ?></span></p>
@@ -74,16 +75,25 @@
 					<p class="availability out-of-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('Out of stock') ?></span></p>
 					<?php endif; ?>
 					<?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
-					<?php echo $this->getChildHtml('alert_urls') ?>
-					<?php if ($_product->getShortDescription()):?>
+
+
+
+
+					
+					
+					
+
+
+					<?php /*echo $this->getChildHtml('alert_urls') */?>
+					<?php /*if ($_product->getShortDescription()):?>
 					<div class="short-description">
 						<h2><?php echo $this->__('Quick Overview') ?></h2>
 						<div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
 					</div>
-					<?php endif;?>
+					<?php endif; */?>
 					<?php echo $this->getChildHtml('short_des_after'); ?>               
 					<?php echo $this->getChildHtml('product_type_data') ?>
-					<?php echo $this->getTierPriceHtml() ?>
+					<?php  echo $this->getTierPriceHtml() ?>
 					<?php if (!$this->hasOptions()):?>
 					<div class="add-to-box">
 						<?php if($_product->isSaleable()): ?>
@@ -95,9 +105,40 @@
 					<div class="add-to-box">
 						<?php echo $this->getChildHtml('addto') ?>
 					</div>
-					<?php endif; ?>               
+					<?php endif; ?>  
+
+
+
+
+					
+
+
+			    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 					<?php echo $this->getChildHtml('other');?>
-					<?php echo $this->getChildHtml('extrahint') ?>               
+					<?php /*echo $this->getChildHtml('extrahint') */?>               
 					<?php if ($_product->isSaleable() && $this->hasOptions()):?>
 					<?php echo $this->getChildChildHtml('container1', '', true, true) ?>
 					<?php endif;?>               
@@ -160,23 +201,7 @@
 			//]]>
 		</script>
 	</div>
-	<!-- Add button share facebook -->
-	<?php if ($setting->getImageProduct_DisableSocial()): ?>
-        <a title="<?php echo $this->__('Toggle Block Social') ?>" href="#" class="show dc-toggle"><?php echo $this->__('Toggle Block Social') ?></a>
-        <div id="social-share" class="hidden-tablet hidden-phone visible-md visible-lg"></div>
-        <script type="text/javascript">
-            jQuery(document).ready(function($){
-                jQuery('#social-share').dcSocialShare({
-                    buttons: '<?php echo $setting->getImageProduct_Buttons('twitter,facebook,linkedin,digg,pinterest') ?>',
-                    align: 'right',
-                    floater: false
-                });
-                jQuery('.dc-toggle').click(function(){
-                   $(this).toggleClass('icon_hide_social'); 
-                });
-            });
-        </script>
-    <?php endif; ?>
+	
    
 	<div class="em-details-tabs details_tab product-collateral">
 		<div class="em-details-tabs-content">
@@ -188,7 +213,7 @@
 				<?php echo $html; ?>
 			</div>
 			<?php endforeach;?>
-			<?php echo $this->getChildHtml('product_additional_data') ?>
+			
 			<?php echo $this->getChildHtml('product_additional_collateral') ?> 
 		</div>
 	</div>
@@ -196,3 +221,4 @@
 	<?php echo $this->getChildHtml('product_additional_data_review') ?>
 	<?php echo $this->getChildHtml('review_list') ?>
 </div>	
+

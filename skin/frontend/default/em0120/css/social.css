@@ -1,11 +1,11 @@
 /* Button panel */
 .dcssb-float .dcssb-content {
-	background: #fff;
+	
 	padding: 10px 5px 10px;
 	text-align: center;
-	border: 1px solid #ccc;
-	border-radius: 3px; 
-	-webkit-border-radius: 3px;
+	
+	
+	
 }
 .dcssb-btn {
 	margin-bottom: 5px;
@@ -21,6 +21,8 @@
 .dcssb-btn.size-vertical {
 	width: 60px;
 	height: 62px;
+	float: left;
+    margin-right: 20px;
 }
 /* Button specific styling */
 /* Digg */

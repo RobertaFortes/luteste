@@ -36,6 +36,93 @@
     $setting = Mage::helper('em0120settings');
     $viewmode = $setting->getImageProduct_Viewmode();
 ?>
+
+<?php if (count($this->getGalleryImages()) > 0): ?>
+    <?php $limitmore = count($this->getGalleryImages()); ?>
+<div class="more-views">   
+    <ul class="<?php if($setting->getImageProduct_UseSlide()):?>em-moreviews-slider <?php if($setting->getImageProduct_SliderPaginationNumbers()):?>owl-pagination-numbers<?php endif;?><?php else:?>em-moreviews-noslider<?php endif;?>">
+        <?php foreach ($this->getGalleryImages() as $_image): ?>
+            <li class="item" >
+                <?php 
+                    $_img = $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile());
+                ?>
+                <?php if ($viewmode == 'cloudzoom'): ?>
+                <?php
+                    $_img_thumb = (string)$_img->resize(null);
+                    if($_img->getOriginalWidth() >= 280)
+                        $mv_w   =   $setting->getImageProduct_BaseImageWidth(280);
+                    else
+                        $mv_w   =   $_img->getOriginalWidth();
+                    $ratio = $mv_w / $_img->getOriginalWidth();
+                    $mv_h = $ratio * $_img->getOriginalHeight();
+                    $_img_thumb = (string)$_img->resize($setting->getImageProduct_ThumbBaseWidth(180), $setting->getImageProduct_ThumbBaseHeight(186));
+                    $_img_small = (string)$this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($mv_w,$mv_h);
+                    $_img_big = (string)$this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile());
+                ?>
+                <a class="cloud-zoom-gallery" rel="
+                    useZoom:'image_zoom',               
+                    smallImage:'<?php echo $_img_small ?>', 
+                    adjustX:5, adjustY:-5" onclick="return false" href="<?php echo $_img_big ?>">
+                        <img src="<?php echo $_img_thumb ?>" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" />
+                </a>
+                    <a class="no-display" href="<?php echo $_img_big ?>" rel="lightbox[em_lightbox]">lightbox moreview</a>
+                    
+                <?php elseif ($viewmode == 'lightbox'): ?>
+                <?php $_img_thumb = (string)$_img->resize($setting->getImageProduct_ThumbBaseWidth(80), $setting->getImageProduct_ThumbBaseHeight()); ?>
+                <a rel="lightbox[em_lightbox]"  href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile()); ?>"  title="<?php echo $this->escapeHtml($_image->getLabel()) ?>">
+                    <img src="<?php echo $_img_thumb; ?>" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" />
+                </a>            
+                <?php else: ?>
+                <?php $_img_thumb = (string)$_img->resize($setting->getImageProduct_ThumbBaseWidth(80), $setting->getImageProduct_ThumbBaseHeight()); ?>
+                <a href="#" onclick="popWin('<?php echo $this->getGalleryUrl($_image) ?>', 'gallery', 'width=300,height=300,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;" title="<?php echo $this->escapeHtml($_image->getLabel()) ?>">
+                    <img src="<?php echo $_img_thumb; ?>" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" /></a>
+                <?php endif ?>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    jQuery('.cloud-zoom-gallery').click(function () {
+        jQuery('#zoom-btn').attr('href', this.href);
+    });
+    <?php if($setting->getImageProduct_UseSlide()):?>
+    (function($) {
+        function doSliderMoreview(){
+            var owl = $("ul.em-moreviews-slider"); 
+            if(owl.length){
+                owl.owlCarousel({             
+                    // Navigation
+                    navigation : <?php echo $setting->getImageProduct_SliderNavigation() ? 'true' : 'false'?>,
+                    navigationText : ["<?php echo $this->__('Previous')?>", "<?php echo $this->__('Next')?>"],
+                    pagination : <?php echo $setting->getImageProduct_SliderPagination() ? 'true' : 'false'?>,
+                    paginationNumbers: <?php echo $setting->getImageProduct_SliderPaginationNumbers() ? 'true' : 'false'?>,
+
+                    // Responsive 
+                    responsive: true,
+                    items : <?php echo $setting->getImageProduct_SliderItems(3) ? $setting->getImageProduct_SliderItems(3) : 3 ?>, /*items above 1200px browser width*/
+                    itemsDesktop : [1200,<?php echo $setting->getImageProduct_SliderItemsDesktop(3) ? $setting->getImageProduct_SliderItemsDesktop(3) : 3 ?>], /*//items between 1199px and 981px*/
+                    itemsDesktopSmall : [992,<?php echo $setting->getImageProduct_SliderItemsDesktopSmall(3) ? $setting->getImageProduct_SliderItemsDesktopSmall(3) : 3 ?>],
+                    itemsTablet: [768,<?php echo $setting->getImageProduct_SliderItemsTablet(2) ? $setting->getImageProduct_SliderItemsTablet(2) : 3 ?>],
+                    itemsTabletSmall : [600,<?php echo $setting->getImageProduct_SliderItemsTabletSmall(2) ? $setting->getImageProduct_SliderItemsTabletSmall(2) : 3 ?>],
+                    itemsMobile : [480,<?php echo $setting->getImageProduct_SliderItemsMobile(1) ? $setting->getImageProduct_SliderItemsMobile(1) : 3 ?>],
+                 
+                    // CSS Styles
+                    baseClass : "owl-carousel",
+                    theme : "owl-theme",
+                    addClassActive : true,
+              });
+          }
+        }
+        $(window).load(function() {
+           doSliderMoreview();
+        });
+    })(jQuery);
+    <?php endif; ?>
+//]]>
+</script>
+<?php endif; ?>
+
 <?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
 <div class="media-left">
 	<?php if ($viewmode == 'cloudzoom'): ?>
@@ -105,88 +192,4 @@
     </p>
 </div>
 <?php endif; ?>
-<?php if (count($this->getGalleryImages()) > 0): ?>
-    <?php $limitmore = count($this->getGalleryImages()); ?>
-<div class="more-views">   
-	<ul class="<?php if($setting->getImageProduct_UseSlide()):?>em-moreviews-slider <?php if($setting->getImageProduct_SliderPaginationNumbers()):?>owl-pagination-numbers<?php endif;?><?php else:?>em-moreviews-noslider<?php endif;?>">
-        <?php foreach ($this->getGalleryImages() as $_image): ?>
-            <li class="item" >
-                <?php 
-                    $_img = $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile());
-                ?>
-    			<?php if ($viewmode == 'cloudzoom'): ?>
-                <?php
-    				$_img_thumb = (string)$_img->resize(null);
-                    if($_img->getOriginalWidth() >= 280)
-                        $mv_w   =   $setting->getImageProduct_BaseImageWidth(280);
-                    else
-                        $mv_w   =   $_img->getOriginalWidth();
-                    $ratio = $mv_w / $_img->getOriginalWidth();
-                    $mv_h = $ratio * $_img->getOriginalHeight();
-    				$_img_thumb = (string)$_img->resize($setting->getImageProduct_ThumbBaseWidth(180), $setting->getImageProduct_ThumbBaseHeight(186));
-                    $_img_small = (string)$this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($mv_w,$mv_h);
-                    $_img_big = (string)$this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile());
-                ?>
-                <a class="cloud-zoom-gallery" rel="
-                    useZoom:'image_zoom',               
-                    smallImage:'<?php echo $_img_small ?>', 
-                    adjustX:5, adjustY:-5" onclick="return false" href="<?php echo $_img_big ?>">
-						<img src="<?php echo $_img_thumb ?>" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" />
-                </a>
-    				<a class="no-display" href="<?php echo $_img_big ?>" rel="lightbox[em_lightbox]">lightbox moreview</a>
-					
-    			<?php elseif ($viewmode == 'lightbox'): ?>
-    			<?php $_img_thumb = (string)$_img->resize($setting->getImageProduct_ThumbBaseWidth(80), $setting->getImageProduct_ThumbBaseHeight()); ?>
-    			<a rel="lightbox[em_lightbox]"  href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile()); ?>"  title="<?php echo $this->escapeHtml($_image->getLabel()) ?>">
-    				<img src="<?php echo $_img_thumb; ?>" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" />
-    			</a>			
-                <?php else: ?>
-    			<?php $_img_thumb = (string)$_img->resize($setting->getImageProduct_ThumbBaseWidth(80), $setting->getImageProduct_ThumbBaseHeight()); ?>
-                <a href="#" onclick="popWin('<?php echo $this->getGalleryUrl($_image) ?>', 'gallery', 'width=300,height=300,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;" title="<?php echo $this->escapeHtml($_image->getLabel()) ?>">
-					<img src="<?php echo $_img_thumb; ?>" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" /></a>
-                <?php endif ?>
-            </li>
-        <?php endforeach; ?>
-        </ul>
-</div>
-<script type="text/javascript">
-//<![CDATA[
-    jQuery('.cloud-zoom-gallery').click(function () {
-    	jQuery('#zoom-btn').attr('href', this.href);
-    });
-    <?php if($setting->getImageProduct_UseSlide()):?>
-    (function($) {
-        function doSliderMoreview(){
-            var owl = $("ul.em-moreviews-slider"); 
-            if(owl.length){
-                owl.owlCarousel({             
-                    // Navigation
-                    navigation : <?php echo $setting->getImageProduct_SliderNavigation() ? 'true' : 'false'?>,
-                    navigationText : ["<?php echo $this->__('Previous')?>", "<?php echo $this->__('Next')?>"],
-                    pagination : <?php echo $setting->getImageProduct_SliderPagination() ? 'true' : 'false'?>,
-                    paginationNumbers: <?php echo $setting->getImageProduct_SliderPaginationNumbers() ? 'true' : 'false'?>,
 
-                    // Responsive 
-                    responsive: true,
-                    items : <?php echo $setting->getImageProduct_SliderItems(3) ? $setting->getImageProduct_SliderItems(3) : 3 ?>, /*items above 1200px browser width*/
-                    itemsDesktop : [1200,<?php echo $setting->getImageProduct_SliderItemsDesktop(3) ? $setting->getImageProduct_SliderItemsDesktop(3) : 3 ?>], /*//items between 1199px and 981px*/
-                    itemsDesktopSmall : [992,<?php echo $setting->getImageProduct_SliderItemsDesktopSmall(3) ? $setting->getImageProduct_SliderItemsDesktopSmall(3) : 3 ?>],
-                    itemsTablet: [768,<?php echo $setting->getImageProduct_SliderItemsTablet(2) ? $setting->getImageProduct_SliderItemsTablet(2) : 3 ?>],
-                    itemsTabletSmall : [600,<?php echo $setting->getImageProduct_SliderItemsTabletSmall(2) ? $setting->getImageProduct_SliderItemsTabletSmall(2) : 3 ?>],
-                    itemsMobile : [480,<?php echo $setting->getImageProduct_SliderItemsMobile(1) ? $setting->getImageProduct_SliderItemsMobile(1) : 3 ?>],
-                 
-                    // CSS Styles
-                    baseClass : "owl-carousel",
-                    theme : "owl-theme",
-                    addClassActive : true,
-              });
-          }
-    	}
-        $(window).load(function() {
-    	   doSliderMoreview();
-    	});
-    })(jQuery);
-    <?php endif; ?>
-//]]>
-</script>
-<?php endif; ?>

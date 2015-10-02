@@ -29,22 +29,58 @@
 ?>
 <div class="header-container">
 	<div class="header-top">
+		<div class="col-sm-24 topomsgeral">
+			<div class="container">
+        			<div class="col-sm-8 first topmsg">
+        				
+						<p class="boleto">5% de desconto à vista no boleto</p>
+						
+						
+        			</div>
+        			<div class="col-sm-6 topmsg">
+        				<p class="gift">Embalamos para presente</p>
+        			</div>
+        			<div class="col-sm-7 topmsg">
+        				<p class="segura">Loja 100% Segura</p>
+        			</div>
+        			<div class="col-sm-3 last topmsg">
+        				<ul class="socialtopo">
+        					<li><a href="" class="facebook">facebook</a></li>
+        					<li><a href="" class="instagram">instagram</a></li>
+
+        				</ul>
+        			</div>
+        		</div>
+
+        		</div>
         <div class="container">
         	<div class="row inner_top">
+        		
 	        	<div class="col-sm-24">
-	            	<div class="header-top-left top-link">
-				<p class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getAdditionalHtml() ?></p>
+
+	        		<div class="logo-container col-sm-6 ">
+						<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+					</div>
+					<div class="header-bottom col-sm-11 ">
+						<?php echo $this->getChildHtml('topSearch') ?>
+					</div>
+	            	<div class="header-top-right col-sm-7 top-link">
+				
 				<?php if (Mage::getSingleton('customer/session')->isLoggedIn()==0): ?>
                             <ul class="links">
-                                <li><span class="icon my_account"></span><a href="<?php echo $this->getBaseUrl()?>customer/account/" title="<?php echo $this->__('My Account') ?>" data-hover="<?php echo $this->__('My Account') ?>"><?php echo $this->__('My Account') ?></a></li>
-                                <li><span class="icon my_wishlist"></span><a href="<?php echo $this->getBaseUrl()?>wishlist/" title="<?php echo $this->__('My Wishlist') ?>" data-hover="<?php echo $this->__('My Wishlist') ?>"><?php echo $this->__('My Wishlist') ?></a></li>
-                                <li><span class="icon log_in"></span><a href="<?php echo $this->getBaseUrl()?>customer/account/login/" title="<?php echo $this->__('Log In') ?>" data-hover="<?php echo $this->__('Log In') ?>"><?php echo $this->__('Log In') ?></a> or <a href="<?php echo $this->getBaseUrl()?>customer/account/create/" title="<?php echo $this->__('Register') ?>" data-hover="<?php echo $this->__('Register') ?>"><?php echo $this->__('Register') ?></a></li>
+                            	<li class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getAdditionalHtml() ?></li>
+                                <li><a href="<?php echo $this->getBaseUrl()?>customer/account/" title="<?php echo $this->__('My Account') ?>" data-hover="<?php echo $this->__('My Account') ?>"><?php echo $this->__('My Account') ?></a></li>
+                                <li><a href="/nossas-lojas">Lojas</a></li>
+                                <li><a href="/contato">Fale Conosco</a></li>
+                                <li><a href="<?php echo $this->getBaseUrl()?>customer/account/login/" title="<?php echo $this->__('Log In') ?>" data-hover="<?php echo $this->__('Log In') ?>"><?php echo $this->__('Log In') ?></a> ou <a href="<?php echo $this->getBaseUrl()?>customer/account/create/" title="<?php echo $this->__('Register') ?>" data-hover="<?php echo $this->__('Register') ?>"><?php echo $this->__('Register') ?></a></li>
                             </ul>
                         <?php else:?>
                             <ul class="links">
-                                <li><span class="icon my_account"></span><a href="<?php echo $this->getBaseUrl()?>customer/account/" title="<?php echo $this->__('My Account') ?>" data-hover="<?php echo $this->__('My Account') ?>"><?php echo $this->__('My Account') ?></a></li>
-                                <li><span class="icon my_wishlist"></span><a href="<?php echo $this->getBaseUrl()?>wishlist/" title="<?php echo $this->__('My Wishlist') ?>" data-hover="<?php echo $this->__('My Wishlist') ?>"><?php echo $this->__('My Wishlist') ?></a></li>
-                                <li><span class="icon log_in"></span><a href="<?php echo $this->getBaseUrl()?>customer/account/logout" title="<?php echo $this->__('Log Out') ?>" data-hover="<?php echo $this->__('Log Out') ?>"><?php echo $this->__('Log Out') ?></a></li>                                
+                            	<li class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getAdditionalHtml() ?></li>
+                                <li><a href="<?php echo $this->getBaseUrl()?>customer/account/" title="<?php echo $this->__('My Account') ?>" data-hover="<?php echo $this->__('My Account') ?>"><?php echo $this->__('My Account') ?></a></li>
+                                 <li><a href="/nossas-lojas">Lojas</a></li>
+                                <li><a href="/contato">Fale Conosco</a></li>
+                                <li><a href="<?php echo $this->getBaseUrl()?>customer/account/logout" title="<?php echo $this->__('Log Out') ?>" data-hover="<?php echo $this->__('Log Out') ?>"><?php echo $this->__('Log Out') ?></a></li>                                
                             </ul>
                         <?php endif;?>
 						
@@ -62,27 +98,25 @@
         <div class="container logo_wrapper">
 			<div class="row header-bottom-top">
 				<div class="col-sm-24">
-					<div class="logo-container col-sm-12 col-sm-push-6">
-						<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
-					</div>
 					
-					<div class="header-bottom-left col-sm-6 col-sm-pull-12">
-						<?php echo $this->getChildHtml('topSearch') ?>
-					</div>
 					
-					<div class="header-bottom-right col-sm-6">
-						<?php echo $this->getChildHtml('cart_sidebar') ?>
-					</div>
+					
+					
+					
 				</div>
 			</div>
 			
-			<div class="row">
+			<div class="row header-bottom-top npadtopo">
                 <div class="col-sm-24">
 					<div class="fix_menu">
 						<div id="navpos"></div>
-						<div class="top-menu">
+						<div class="top-menu col-sm-18">
 							<?php echo $this->getChildHtml('topMenu') ?>
-						</div>						
+						</div>
+
+						<div class="header-bottom-right ">
+						<?php echo $this->getChildHtml('cart_sidebar') ?>
+					</div>						
 					</div>
                 </div>
 			</div>

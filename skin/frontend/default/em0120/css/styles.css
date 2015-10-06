@@ -3760,8 +3760,8 @@ ol.mini-products-list{
 	/*text-transform:uppercase;*/
 }
 .block-cart-top .block-content .block-title a:before{
-	background:url(../images/icons.png) -160px -657px no-repeat;
-	width:30px; height:30px;content: "";
+	background:url(../images/bag45.png)  no-repeat;
+	width:28px; height:28px;content: "";
 	position: absolute;
 	top:0;
 	left:10px;
@@ -5653,7 +5653,7 @@ input.input-text, select, textarea{padding-top:12px\9; padding-bottom:12px\9;}
 
 .menu-item-depth-0 > .em-catalog-navigation > li.level0 > a span{
 	padding: 5px 10px 5px !important;
-	font-size: 14px !important;
+	font-size: 12px !important;
 }
 
 ul.add-to-links{
@@ -5760,7 +5760,7 @@ ul.tabs-control.r-tabs-nav{
 }
 
 .checkout-types button.button > span {
-  padding: 8px 80px 9px 78px;
+  padding: 8px 36px 8px 36px;
   border: 1px solid #cdcdcd;
 }
 
@@ -6147,5 +6147,19 @@ body.catalog-category-view .medidor{
 }
 
 body.catalog-category-view .col-left.sidebar .widget.widget-static-block {
-	    padding-left: 15px;
+	padding-left: 15px;
+}
+body.checkout-cart-index button.btn-continue,body.checkout-cart-index .cart .discount .buttons-set button.button,
+body.checkout-cart-index .cart .shipping .buttons-set button.button{
+	color: #b95b79 !important;
+    border-color: #b95b79 !important;
+    background-color: transparent !important;
+    font: 500 12px/1.35 Open Sans,Arial, Helvetica, sans-serif !important;
+}
+a.mhome{
+background:url("../images/house158.png") no-repeat;
+width: 24px;
+height: 24px;
+display: block;
+text-indent: -5000px;
 }

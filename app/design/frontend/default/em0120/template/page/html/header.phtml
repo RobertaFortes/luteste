@@ -69,18 +69,20 @@
 				<?php if (Mage::getSingleton('customer/session')->isLoggedIn()==0): ?>
                             <ul class="links">
                             	<li class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getAdditionalHtml() ?></li>
-                                <li><a href="<?php echo $this->getBaseUrl()?>customer/account/" title="<?php echo $this->__('My Account') ?>" data-hover="<?php echo $this->__('My Account') ?>"><?php echo $this->__('My Account') ?></a></li>
-                                <li><a href="/nossas-lojas">Lojas</a></li>
-                                <li><a href="/contato">Fale Conosco</a></li>
+                                <!-- <li><a href="<?php echo $this->getBaseUrl()?>customer/account/" title="<?php echo $this->__('My Account') ?>" data-hover="<?php echo $this->__('My Account') ?>"><?php echo $this->__('My Account') ?></a></li> -->
+                               <!--  <li><a href="/nossas-lojas">Lojas</a></li>
+                                <li><a href="/contato">Fale Conosco</a></li> -->
                                 <li><a href="<?php echo $this->getBaseUrl()?>customer/account/login/" title="<?php echo $this->__('Log In') ?>" data-hover="<?php echo $this->__('Log In') ?>"><?php echo $this->__('Log In') ?></a> ou <a href="<?php echo $this->getBaseUrl()?>customer/account/create/" title="<?php echo $this->__('Register') ?>" data-hover="<?php echo $this->__('Register') ?>"><?php echo $this->__('Register') ?></a></li>
+                                <li><a href="/customer-service">Central de atendimento</a></li>
                             </ul>
                         <?php else:?>
                             <ul class="links">
                             	<li class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getAdditionalHtml() ?></li>
-                                <li><a href="<?php echo $this->getBaseUrl()?>customer/account/" title="<?php echo $this->__('My Account') ?>" data-hover="<?php echo $this->__('My Account') ?>"><?php echo $this->__('My Account') ?></a></li>
+                                <!-- <li><a href="<?php echo $this->getBaseUrl()?>customer/account/" title="<?php echo $this->__('My Account') ?>" data-hover="<?php echo $this->__('My Account') ?>"><?php echo $this->__('My Account') ?></a></li>
                                  <li><a href="/nossas-lojas">Lojas</a></li>
-                                <li><a href="/contato">Fale Conosco</a></li>
-                                <li><a href="<?php echo $this->getBaseUrl()?>customer/account/logout" title="<?php echo $this->__('Log Out') ?>" data-hover="<?php echo $this->__('Log Out') ?>"><?php echo $this->__('Log Out') ?></a></li>                                
+                                <li><a href="/contato">Fale Conosco</a></li> -->
+                                <li><a href="<?php echo $this->getBaseUrl()?>customer/account/logout" title="<?php echo $this->__('Log Out') ?>" data-hover="<?php echo $this->__('Log Out') ?>"><?php echo $this->__('Log Out') ?></a></li>
+                                <li><a href="/customer-service">Central de atendimento</a></li>                                
                             </ul>
                         <?php endif;?>
 						
